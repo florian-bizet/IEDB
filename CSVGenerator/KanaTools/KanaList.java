@@ -49,15 +49,15 @@ public class KanaList {
         this.lstKana.add(new Kana("た","タ", "ta", false));
         this.lstKana.add(new Kana("ち","チ", "chi", true));
         this.lstKana.add(new Kana("つ","ツ", "tsu", false));
-        this.lstKana.add(new Kana("て","テ", "te", false));
-        this.lstKana.add(new Kana("と","ト", "to", false));
+        this.lstKana.add(new Kana("て","テ", "te", true));
+        this.lstKana.add(new Kana("と","ト", "to", true));
 
         //DA JI ZU DE DO
         this.lstKana.add(new Kana("だ","ダ", "da", false));
         this.lstKana.add(new Kana("ぢ","ヂ", "ji", true));
         this.lstKana.add(new Kana("づ","ヅ", "zu", false));
-        this.lstKana.add(new Kana("で","デ", "de", false));
-        this.lstKana.add(new Kana("ど","ド", "do", false));
+        this.lstKana.add(new Kana("で","デ", "de", true));
+        this.lstKana.add(new Kana("ど","ド", "do", true));
 
         //NA NI NU NE NO
         this.lstKana.add(new Kana("な","ナ", "na", false));
@@ -69,7 +69,7 @@ public class KanaList {
         //HA HI FU HE HO
         this.lstKana.add(new Kana("は","ハ", "ha", false));
         this.lstKana.add(new Kana("ひ","ヒ", "hi", true));
-        this.lstKana.add(new Kana("ふ","フ", "fu", false));
+        this.lstKana.add(new Kana("ふ","フ", "fu", true));
         this.lstKana.add(new Kana("へ","ヘ", "he", false));
         this.lstKana.add(new Kana("ほ","ホ", "ho", false));
 
