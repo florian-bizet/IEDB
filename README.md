@@ -7,7 +7,7 @@ Browsing Game Files to fetch Data
 
 ## To Do List :
 
-Get Player Stats
+Get Player Stats (Role, Type, GP, TP, Kick, Body, Control, Guard, Speed, Stamina, Guts)
 
 Get Dub Names
 
