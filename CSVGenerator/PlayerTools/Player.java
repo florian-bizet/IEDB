@@ -3,7 +3,7 @@ package PlayerTools;
 import KanaTools.KanaToRomaji;
 
 public class Player {
-    public static final String[] headers = new String[] {"kanjiName","longKanaName","shortKanaName","longRomajiName","shortRomajiName"};
+    public static final String[] headers = new String[] {"kanjiName","longKanaName","shortKanaName","longRomajiName","shortRomajiName","japaneseDescription"};
     
     private String kanjiName;
     private String longKanaName;
@@ -11,6 +11,8 @@ public class Player {
     
     private String longRomajiName;
     private String shortRomajiName;
+
+    private String japaneseDescription;
 
     public Player(String kanji, String longName, String shortName) {
         this.kanjiName     = kanji;
@@ -61,12 +63,20 @@ public class Player {
     }
 
     public String csvString() {
-        return this.kanjiName+","+this.longKanaName+","+this.shortKanaName+","+this.longRomajiName+","+this.shortRomajiName;
+        return this.kanjiName      +","+
+               this.longKanaName   +","+ 
+               this.shortKanaName  +","+
+               this.longRomajiName +","+
+               this.shortRomajiName+","+
+               this.japaneseDescription;
     }
 
-    public String getKanjiName      () {return this.kanjiName;      }
-    public String getLongKanaName   () {return this.longKanaName;   }
-    public String getShortKanaName  () {return this.shortKanaName;  }
-    public String getLongRomajiName () {return this.longRomajiName; }
-    public String getShortRomajiName() {return this.shortRomajiName;}
+    public String getKanjiName          () {return this.kanjiName;          }
+    public String getLongKanaName       () {return this.longKanaName;       }
+    public String getShortKanaName      () {return this.shortKanaName;      }
+    public String getLongRomajiName     () {return this.longRomajiName;     }
+    public String getShortRomajiName    () {return this.shortRomajiName;    }
+    public String getJapaneseDescription() {return this.japaneseDescription;}
+
+    public void   setJapaneseDescription(String s) {this.japaneseDescription = s;}
 }

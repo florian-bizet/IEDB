@@ -22,7 +22,8 @@ public class Main
     }
 
     public void process() {
-        IEFileReader.loadPlayers(this.playerList);
+        IEFileReader.loadPlayers     (this.playerList);
+        IEFileReader.loadDescriptions(this.playerList);
         for (Player p : this.playerList) {
             p.romanize(kanaConverter);
         }
