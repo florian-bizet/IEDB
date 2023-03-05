@@ -3,8 +3,12 @@ package PlayerTools;
 import KanaTools.KanaToRomaji;
 
 public class Player {
-    public static final String[] headers = new String[] {"kanjiName","longKanaName","shortKanaName","longRomajiName","shortRomajiName","japaneseDescription"};
+    public static final String[] headers = new String[] {"kanjiName","longKanaName","shortKanaName",
+                                                         "longRomajiName","shortRomajiName",
+                                                         "japaneseDescription",
+                                                         "GP","TP","Kick","Body","Control","Guard","Speed","Stamina","Guts"};
     
+    /* Player Name */
     private String kanjiName;
     private String longKanaName;
     private String shortKanaName;
@@ -12,7 +16,20 @@ public class Player {
     private String longRomajiName;
     private String shortRomajiName;
 
+    /* Player Description */
     private String japaneseDescription;
+
+    /* Player Stats */
+    private int GP;
+    private int TP;
+    private int kick;
+    private int body;
+    private int control;
+    private int guard;
+    private int speed;
+    private int stamina;
+    private int guts;
+    private int freedom;
 
     public Player(String kanji, String longName, String shortName) {
         this.kanjiName     = kanji;
@@ -63,12 +80,21 @@ public class Player {
     }
 
     public String csvString() {
-        return this.kanjiName      +","+
-               this.longKanaName   +","+ 
-               this.shortKanaName  +","+
-               this.longRomajiName +","+
-               this.shortRomajiName+","+
-               this.japaneseDescription;
+        return this.kanjiName          +","+
+               this.longKanaName       +","+ 
+               this.shortKanaName      +","+
+               this.longRomajiName     +","+
+               this.shortRomajiName    +","+
+               this.japaneseDescription+","+
+               this.GP                 +","+
+               this.TP                 +","+
+               this.kick               +","+
+               this.body               +","+
+               this.control            +","+
+               this.guard              +","+
+               this.speed              +","+
+               this.stamina            +","+
+               this.guts    ;
     }
 
     public String getKanjiName          () {return this.kanjiName;          }
@@ -79,4 +105,15 @@ public class Player {
     public String getJapaneseDescription() {return this.japaneseDescription;}
 
     public void   setJapaneseDescription(String s) {this.japaneseDescription = s;}
+    public void   setStats(int GP, int TP, int kick, int body, int control, int guard, int speed, int stamina, int guts) {
+        this.GP      = GP;
+        this.TP      = TP;
+        this.kick    = kick    ;
+        this.body    = body    ;
+        this.control = control ;
+        this.guard   = guard   ;
+        this.speed   = speed   ;
+        this.stamina = stamina ;
+        this.guts    = guts    ;
+    }
 }
