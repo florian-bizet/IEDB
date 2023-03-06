@@ -6,4 +6,8 @@ public class Hissatsu {
 
     private int tpCost;
     private int power; /* Not sure if it exists */
+
+    public Hissatsu(String name) {
+        this.japaneseName = name;
+    }
 }
