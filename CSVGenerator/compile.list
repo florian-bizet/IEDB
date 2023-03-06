@@ -3,7 +3,4 @@ KanaTools/KanaList.java
 KanaTools/KanaToRomaji.java
 PlayerTools/IEFileReader.java
 PlayerTools/Player.java
-CSVTools/CSVReader.java
-CSVTools/CSVWriter.java
-SQLTools/SQLWriter.java
 Main.java
