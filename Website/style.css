@@ -39,12 +39,21 @@ nav div a {
     width: fit-content;
     text-align: center;
     background-color: var(--element-color);
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
-nav div a img {
+.dsIcon {
+    width: 100px;
+    height: auto;
+}
+
+.gameLogo {
     width : 300px;
     height: auto;
 }
+
+
 
 footer {
     border-top: solid black 2px;
