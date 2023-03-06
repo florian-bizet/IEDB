@@ -1,4 +1,4 @@
-package CSVExport;
+package CSVTools;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -12,7 +12,7 @@ public class CSVWriter
     public static void exportCSV(List<Player> playerList) 
     {
         try {
-            FileOutputStream os = new FileOutputStream("output.csv");
+            FileOutputStream os = new FileOutputStream("players.csv");
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(os, "UTF-8"));
 
             //Writing Headers

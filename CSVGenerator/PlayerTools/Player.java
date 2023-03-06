@@ -31,6 +31,26 @@ public class Player {
     private int guts;
     private int freedom;
 
+    public Player(String kanjiName, String longKanaName, String shortKanaName, String longRomajiName,
+            String shortRomajiName, String japaneseDescription, int gP, int tP, int kick, int body, int control,
+            int guard, int speed, int stamina, int guts) {
+        this.kanjiName = kanjiName;
+        this.longKanaName = longKanaName;
+        this.shortKanaName = shortKanaName;
+        this.longRomajiName = longRomajiName;
+        this.shortRomajiName = shortRomajiName;
+        this.japaneseDescription = japaneseDescription;
+        GP = gP;
+        TP = tP;
+        this.kick = kick;
+        this.body = body;
+        this.control = control;
+        this.guard = guard;
+        this.speed = speed;
+        this.stamina = stamina;
+        this.guts = guts;
+    }
+
     public Player(String kanji, String longName, String shortName) {
         this.kanjiName     = kanji;
         this.longKanaName  = longName;
@@ -95,6 +115,25 @@ public class Player {
                this.speed              +","+
                this.stamina            +","+
                this.guts    ;
+    }
+
+    public String sqlString(int id) {
+        return "(" + id + ",'" + 
+                     this.kanjiName          +"','"+
+                     this.longKanaName       +"','"+ 
+                     this.shortKanaName      +"','"+
+                     this.longRomajiName     +"','"+
+                     this.shortRomajiName    +"','"+
+                     this.japaneseDescription+"',"+
+                     this.GP                 +","+
+                     this.TP                 +","+
+                     this.kick               +","+
+                     this.body               +","+
+                     this.control            +","+
+                     this.guard              +","+
+                     this.speed              +","+
+                     this.stamina            +","+
+                     this.guts               +")";
     }
 
     public String getKanjiName          () {return this.kanjiName;          }
