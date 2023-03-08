@@ -2,6 +2,8 @@
 
 require 'PlayerIE1.inc.php';
 
+
+//This class uses PDO to connect to a PostgreSQL Database
 class DBIE1 {
 	private static $singleton = null; 
 	private $connexion=null; 
