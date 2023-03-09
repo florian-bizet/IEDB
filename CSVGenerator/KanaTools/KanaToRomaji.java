@@ -1,8 +1,5 @@
 package KanaTools;
 
-import java.text.Collator;
-import java.util.Locale;
-
 public class KanaToRomaji 
 {
     private KanaList kanaList;

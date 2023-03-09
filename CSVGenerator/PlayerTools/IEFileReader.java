@@ -5,11 +5,15 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class IEFileReader {
+    /**
+     * This method reads the PlayerList.txt file, which is a simplified version of unitbase.dat
+     * This will get replaced someday to read the original file, as it might contain more info
+     * @param currentPlayerList 
+     */
     public static void loadPlayers(List<Player> currentPlayerList) {
         try {
             Scanner sc = new Scanner(new FileInputStream("./InputFiles/PlayerList.txt"), "UTF-8");
@@ -28,28 +32,45 @@ public class IEFileReader {
         }
     }
 
+    /**
+     * This method reads the unitbase.STR, which is structured with zones of 32 bytes of data.
+     * Each description is separated with at least one 00 byte, so when this method reads one,
+     * it saves the current description to its player and goes to the next 32 byte zone
+     * @param currentPlayerList
+     */
     public static void loadDescriptions(List<Player> currentPlayerList) {
         
         //Player that will receive the description
         int currentPlayerId = 0;
         try {
+            //Opening File
             File descFile = new File("InputFiles/unitbase.STR");
             InputStream in = new FileInputStream(descFile);
             Reader reader = new InputStreamReader(in, "Shift_JIS");
+            
             StringBuilder sb = new StringBuilder();
-            int read;
-            int bytesRead = 0;
+
+            int read; //Current value
+            int bytesRead = 0; //Used to count 32 byte zones
+
             while ((read = reader.read()) != -1){
+                //Some characters might take 2 bytes instead of only 1, 
+                //so we must have this in mind when keeping track of our position in the file
                 bytesRead += (read > 255 ? 2 : 1); 
+                
                 if (read == 0) {
-                    
                     String desc = sb.toString();
-                    desc = desc.replace(""+((char)0), "");
                     desc = desc.replace("\n", "");
+
                     currentPlayerList.get(currentPlayerId++).setJapaneseDescription(desc);
-                    sb = new StringBuilder();
+                    
+                    //Navigating to the next 32 byte zone
                     while (bytesRead != 0 && bytesRead%32 != 0) {read = reader.read(); bytesRead += (read > 255 ? 2 : 1);}
+
+                    //Resetting values
+                    sb = new StringBuilder();
                     bytesRead = 0;
+                    continue;
                 }
                 sb.append((char)read);
             }
@@ -60,6 +81,11 @@ public class IEFileReader {
 
     }
 
+    /**
+     * This method reads the unitstat.dat file, which is structured with zones of 64 bytes of data.
+     * It reads specific bytes that are used in the game to get the players statistics.
+     * @param currentPlayerList
+     */
     public static void loadStats(List<Player> currentPlayerList) {
         int currentPlayerId = 0;
         try {
@@ -82,6 +108,66 @@ public class IEFileReader {
                 currentPlayerList.get(currentPlayerId++).setStats(GP, TP, kick, body, control, guard, speed, stamina, guts);
             }
 
+            in.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method reads the command.STR file, 
+     * which contains data for the soccer mode actions and for the hissatsu techniques.
+     * It is organized in a way that an action has 2 main sections : 
+     * The first one contains the action name stored with 32 bytes, and the next section contains the description, 
+     * splitted in 32 byte zones like player descriptions
+     * @param currentHissatsuList
+     */
+    public static void loadHissatsu(List<Hissatsu> currentHissatsuList) {
+        try {
+            //Opening File
+            File descFile = new File("InputFiles/command.STR");
+            InputStream in = new FileInputStream(descFile);
+            Reader reader = new InputStreamReader(in, "Shift_JIS");
+            
+            StringBuilder sb = new StringBuilder();
+
+            int section = 0; //0 = name; 1 = description
+            String name = "";
+            String desc = "";
+
+            int read; //Current value
+            int bytesRead = 0; //Used to count 32 byte zones
+
+            while ((read = reader.read()) != -1){
+                //Some characters might take 2 bytes instead of only 1, 
+                //so we must have this in mind when keeping track of our position in the file
+                bytesRead += (read > 255 ? 2 : 1); 
+                
+                if (read == 0) {
+                    String text = sb.toString();
+                    text = text.replace("\n", "");
+
+                    if (section == 0) {name = text;}
+                    else {
+                        desc = text;
+                        currentHissatsuList.add(new Hissatsu(name, desc));
+                        name = "";
+                        desc = "";
+                    }
+                    
+                    //Navigating to the next 32 byte zone
+                    while (bytesRead != 0 && bytesRead%32 != 0) {read = reader.read(); bytesRead += (read > 255 ? 2 : 1);}
+
+                    //Resetting values
+                    section = (section+1)%2;
+                    sb = new StringBuilder();
+                    bytesRead = 0;
+                    continue;
+                }
+                sb.append((char)read);
+            }
+            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

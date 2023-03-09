@@ -1,35 +1,41 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import CSVTools.CSVReader;
 import CSVTools.CSVWriter;
 import KanaTools.*;
+import PlayerTools.Hissatsu;
 import PlayerTools.IEFileReader;
 import PlayerTools.Player;
 import SQLTools.SQLWriter;
 
 public class Main 
 {
-    private List<Player> playerList;
+    //Lists
+    private List<Player>   playerList;
+    private List<Hissatsu> hissatsuList;
+    //Utils
     private KanaToRomaji kanaConverter;
     
     public Main() {
-        this.playerList    = new ArrayList<Player>();
-        this.kanaConverter = new KanaToRomaji();
+        this.playerList    = new ArrayList<Player>  ();
+        this.hissatsuList  = new ArrayList<Hissatsu>();
+        this.kanaConverter = new KanaToRomaji       ();
     }
 
     public void sourceToCSV() {
+        //Hissatsu List
+        IEFileReader.loadHissatsu(this.hissatsuList);
+        CSVWriter.exportHissatsu(this.hissatsuList);
+        
+        //Player List
         IEFileReader.loadPlayers     (this.playerList);
         IEFileReader.loadDescriptions(this.playerList);
         IEFileReader.loadStats       (this.playerList);
         for (Player p : this.playerList) {
             p.romanize(kanaConverter);
         }
+        CSVWriter.exportPlayers(playerList);
     }
 
     public void csvToSQL() {

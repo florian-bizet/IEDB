@@ -5,8 +5,10 @@ A Website to check data from the DS Game "Inazuma Eleven". (WIP)
 
 - Data Fetching
     - CSV Generator from IE1 data files
-        - Player List
+        - Player List (WIP)
         - Hissatsu List (WIP)
     - SQL Insert Query Generator
-        - Players
-- Website (WIP)
+        - Players (WIP)
+- Website 
+    - Player List (WIP)
+    - Player Data (WIP)
