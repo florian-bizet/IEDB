@@ -172,4 +172,32 @@ public class IEFileReader {
             e.printStackTrace();
         }
     }
+
+    public static void loadHissatsuStats(List<Hissatsu> hissatsuList) {
+        int currentHissatsuId = 0;
+        try {
+            File descFile = new File("InputFiles/command.dat");
+            InputStream in = new FileInputStream(descFile);
+
+            while (in.available() >= 24) {
+                if (currentHissatsuId >= hissatsuList.size()) {return;}
+                byte[] statBytes = in.readNBytes(24);
+                Hissatsu h = hissatsuList.get(currentHissatsuId++);
+
+                int tpCost      = (int) (statBytes[4 ] & 0xFF);
+                int type        = (int) (statBytes[0 ] & 0xFF);
+                int element     = (int) (statBytes[8 ] & 0xFF);
+                int playerCount = (int) (statBytes[10] & 0xFF);
+                int foulRate    = (int) (statBytes[1 ] & 0xFF);
+                int punchForce  = (int) (statBytes[14] & 0xFF); 
+
+                h.setStats(tpCost, type, element, playerCount, foulRate, punchForce);
+            }
+
+            in.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

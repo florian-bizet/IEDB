@@ -26,8 +26,9 @@ public class Main
     public void sourceToCSV() {
         //Hissatsu List
         IEFileReader.loadHissatsu(this.hissatsuList);
+        IEFileReader.loadHissatsuStats(this.hissatsuList);
         CSVWriter.exportHissatsu(this.hissatsuList);
-        
+        /* 
         //Player List
         IEFileReader.loadPlayers     (this.playerList);
         IEFileReader.loadDescriptions(this.playerList);
@@ -35,7 +36,7 @@ public class Main
         for (Player p : this.playerList) {
             p.romanize(kanaConverter);
         }
-        CSVWriter.exportPlayers(playerList);
+        CSVWriter.exportPlayers(playerList);*/
     }
 
     public void csvToSQL() {
