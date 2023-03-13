@@ -86,7 +86,7 @@ public class IEFileReader {
      * It reads specific bytes that are used in the game to get the players statistics.
      * @param currentPlayerList
      */
-    public static void loadStats(List<Player> currentPlayerList) {
+    public static void loadStats(List<Player> currentPlayerList, List<Hissatsu> hissatsuList) {
         int currentPlayerId = 0;
         try {
             File descFile = new File("InputFiles/unitstat.dat");
@@ -105,7 +105,14 @@ public class IEFileReader {
                 int stamina =  (int) (statBytes[41] & 0xFF);
                 int guts    =  (int) (statBytes[37] & 0xFF);
 
-                currentPlayerList.get(currentPlayerId++).setStats(GP, TP, kick, body, control, guard, speed, stamina, guts);
+                currentPlayerList.get(currentPlayerId).setStats(GP, TP, kick, body, control, guard, speed, stamina, guts);
+
+                for (int i = 0; i < 8; i += 2) {
+                    int hissatsuID = (int) (statBytes[44+i] & 0xFF);
+                    currentPlayerList.get(currentPlayerId).setHissatsu(hissatsuList.get(hissatsuID), i/2);
+                } 
+
+                currentPlayerId++;
             }
 
             in.close();

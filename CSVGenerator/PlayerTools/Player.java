@@ -6,7 +6,8 @@ public class Player {
     public static final String[] headers = new String[] {"kanjiName","longKanaName","shortKanaName",
                                                          "longRomajiName","shortRomajiName",
                                                          "japaneseDescription",
-                                                         "GP","TP","Kick","Body","Control","Guard","Speed","Stamina","Guts"};
+                                                         "GP","TP","Kick","Body","Control","Guard","Speed","Stamina","Guts",
+                                                         "Hissatsu1","Hissatsu2","Hissatsu3","Hissatsu4"};
     
     /* Player Name */
     private String kanjiName;
@@ -30,6 +31,8 @@ public class Player {
     private int stamina;
     private int guts;
     private int freedom;
+
+    private Hissatsu[] moveset;
 
     public Player(String kanjiName, String longKanaName, String shortKanaName, String longRomajiName,
             String shortRomajiName, String japaneseDescription, int gP, int tP, int kick, int body, int control,
@@ -55,6 +58,7 @@ public class Player {
         this.kanjiName     = kanji;
         this.longKanaName  = longName;
         this.shortKanaName = shortName;
+        this.moveset = new Hissatsu[4];
     }
 
     public void romanize(KanaToRomaji converter) {
@@ -114,7 +118,11 @@ public class Player {
                this.guard              +","+
                this.speed              +","+
                this.stamina            +","+
-               this.guts    ;
+               this.guts               +","+
+               this.moveset[0].getJapaneseName() +","+
+               this.moveset[1].getJapaneseName() +","+
+               this.moveset[2].getJapaneseName() +","+ 
+               this.moveset[3].getJapaneseName(); 
     }
 
     public String sqlString(int id) {
@@ -154,5 +162,12 @@ public class Player {
         this.speed   = speed   ;
         this.stamina = stamina ;
         this.guts    = guts    ;
+    }
+
+    public void setHissatsu(Hissatsu h, int index) {
+        if (h == null) {System.out.println("huh"); return;}
+        if (index < 0 && index > 3) return;
+
+        this.moveset[index] = h;
     }
 }

@@ -28,7 +28,7 @@ public class CSVWriter
 
             pw.close();
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
         
     }

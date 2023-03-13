@@ -27,16 +27,17 @@ public class Main
         //Hissatsu List
         IEFileReader.loadHissatsu(this.hissatsuList);
         IEFileReader.loadHissatsuStats(this.hissatsuList);
-        CSVWriter.exportHissatsu(this.hissatsuList);
-        /* 
+        
         //Player List
         IEFileReader.loadPlayers     (this.playerList);
         IEFileReader.loadDescriptions(this.playerList);
-        IEFileReader.loadStats       (this.playerList);
+        IEFileReader.loadStats       (this.playerList, this.hissatsuList);
         for (Player p : this.playerList) {
             p.romanize(kanaConverter);
         }
-        CSVWriter.exportPlayers(playerList);*/
+
+        CSVWriter.exportPlayers(playerList);
+        CSVWriter.exportHissatsu(this.hissatsuList);
     }
 
     public void csvToSQL() {
